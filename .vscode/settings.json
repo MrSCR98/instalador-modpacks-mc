@@ -1,0 +1,52 @@
+{
+  // Configuración de formato
+  "editor.formatOnSave": true,
+
+  // Configuraciones específicas para cada lenguaje
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // Formateador para archivos CSS
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer", // Prioriza el formateador de Rust
+    "editor.formatOnSave": true // Asegura que Rust también se formatee al guardar
+  },
+
+  // Configuración general de Prettier
+  "prettier.trailingComma": "es5",
+  "prettier.semi": false,
+  "prettier.singleQuote": true, // ''
+
+  // Configuración de ESLint
+  "eslint.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  // Acciones de código
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit" // Organiza las importaciones de manera explícita al guardar archivos
+  },
+
+  // Configuración de anidamiento de archivos
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "$(capture).test.ts, $(capture).test.tsx",
+    "*.tsx": "$(capture).test.ts, $(capture).test.tsx"
+  }
+}
