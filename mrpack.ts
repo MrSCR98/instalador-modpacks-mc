@@ -137,6 +137,15 @@ async function exists(p: string): Promise<boolean> {
   )
 }
 
+/** Muestra el contador en una linea y el detalle debajo, con sangria (un solo console.log: no se mezcla en paralelo). */
+function logProgress(n: number, total: number, detail: string) {
+  const body = detail
+    .split('\n')
+    .map((line) => '    ' + line)
+    .join('\n')
+  console.log(`[${n}/${total}]\n${body}`)
+}
+
 async function downloadFile(entry: PackFile, base: string): Promise<string> {
   const target = safeTarget(base, entry.path)
 
@@ -176,7 +185,7 @@ async function downloadFile(entry: PackFile, base: string): Promise<string> {
       const tmp = target + '.part'
       await Bun.write(tmp, data)
       await rename(tmp, target)
-      return `+ ${entry.path}\n      desde: ${url}`
+      return `+ ${entry.path}\ndesde: ${url}`
     } catch (e) {
       lastError = (e as Error).message
     }
@@ -267,10 +276,10 @@ async function install(
   await pool(files, workers, async (entry) => {
     try {
       const msg = await downloadFile(entry, dest)
-      console.log(`[${++done}/${files.length}] ${msg}`)
+      logProgress(++done, files.length, msg)
     } catch (e) {
       errors.push((e as Error).message)
-      console.log(`[${++done}/${files.length}] ERROR ${(e as Error).message}`)
+      logProgress(++done, files.length, `ERROR ${(e as Error).message}`)
     }
   })
 
