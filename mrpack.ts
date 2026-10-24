@@ -310,7 +310,8 @@ async function ask(question: string): Promise<string | null> {
 
 /** Nombre de carpeta valido en Windows/Linux/macOS. */
 function folderName(pack: Pack, mrpackPath: string): string {
-  const raw = pack.index.name || basename(mrpackPath).replace(/\.mrpack$/i, '')
+  const name = pack.index.name || basename(mrpackPath).replace(/\.mrpack$/i, '')
+  const raw = pack.index.versionId ? `${name} ${pack.index.versionId}` : name
   const clean = raw
     .replace(/[<>:"/\\|?*\x00-\x1f]/g, '')
     .replace(/[. ]+$/, '')
