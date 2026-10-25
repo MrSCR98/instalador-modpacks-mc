@@ -1,4 +1,4 @@
-# Instalador ModPacks .mrpack MC
+# <img src=".img\favicon.png" alt="Logo" height="24"> Instalador ModPacks .mrpack MC
 
 Una aplicación sencilla para instalar modpacks de Minecraft (`.mrpack`) de [Modrinth](https://modrinth.com) **sin tener que instalar la app de Modrinth**.
 
