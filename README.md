@@ -8,7 +8,7 @@ Descargas el `.mrpack` de la web, lo abres con el programa y él se encarga de b
 
 ## ⬇️ Descargar
 
-👉 [mrpack-windows-x64.exe](https://github.com/TU-USUARIO/mrpack-installer/releases/latest/download/mrpack-windows-x64.exe)
+👉 [mrpack.exe](https://github.com/MrSCR98/instalador-modpacks-mc/releases/download/Ejecutable/mrpack.exe)
 
 ---
 
