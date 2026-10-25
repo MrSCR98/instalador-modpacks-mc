@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "bun run mrpack.ts",
-    "build": "bun build --compile mrpack.ts --outfile exe/mrpack"
+    "build": "bun build --compile mrpack.ts --windows-icon=.img/favicon_256x256.ico --outfile exe/mrpack"
   },
   "devDependencies": {
     "@types/bun": "^1.4.4"
