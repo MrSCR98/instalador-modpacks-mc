@@ -7,7 +7,7 @@
  *   bun run mrpack.ts            (modo interactivo)
  */
 import { mkdir, open, rename, rm, stat, statfs } from 'node:fs/promises'
-import { freemem, homedir } from 'node:os'
+import { freemem } from 'node:os'
 import { basename, dirname, join, resolve, sep } from 'node:path'
 import { parseArgs } from 'node:util'
 import { crc32 } from 'node:zlib'
@@ -795,42 +795,16 @@ function folderName(pack: Pack, mrpackPath: string): string {
   return clean || 'modpack'
 }
 
-const CONFIG_PATH = join(homedir(), '.mrpack-installer.json')
-
-async function loadBaseDir(): Promise<string | undefined> {
-  try {
-    return JSON.parse(await Bun.file(CONFIG_PATH).text()).baseDir
-  } catch {
-    return undefined
-  }
-}
-
-async function saveBaseDir(baseDir: string) {
-  try {
-    await Bun.write(CONFIG_PATH, JSON.stringify({ baseDir }, null, 2))
-  } catch {
-    /* no es critico */
-  }
-}
-
 async function pause() {
   await ask('\nPulsa Enter para salir...')
 }
 
-/** Pregunta/confirma la carpeta base. Enter = mantener la recordada. */
+/** Pregunta la carpeta base. No se guarda en disco: solo se recuerda mientras el programa esta abierto. */
 async function chooseBaseDir(): Promise<string | null> {
-  const saved = await loadBaseDir()
-  const hint = saved ? ` [${saved}]` : ''
   while (true) {
-    const answer = await ask(
-      `Carpeta base donde instalar los modpacks${hint}\n> `
-    )
+    const answer = await ask('Carpeta base donde instalar los modpacks\n> ')
     if (answer === null) return null
-    const chosen = answer || saved
-    if (chosen) {
-      await saveBaseDir(chosen)
-      return chosen
-    }
+    if (answer) return answer
     console.log('Debes indicar una carpeta.')
   }
 }
@@ -918,9 +892,6 @@ if (positionals.length > 0) {
       `\nCarpeta base actual: ${baseDir}\nEnter = mantener, o escribe otra carpeta base:\n> `
     )
     if (change === null) break
-    if (change) {
-      baseDir = change
-      await saveBaseDir(baseDir)
-    }
+    if (change) baseDir = change
   }
 }
